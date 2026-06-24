@@ -9,9 +9,9 @@ Use the official Intel/AMD Manuals, the relevant System V ABI and man pages, an 
 !! NEVER apply AI !!
 
 References: 
- - Intel 64 and IA-32 Architectures Software Developer's Manual (June 2026 version), relevant here is especially the 
- - https://wiki.osdev.org/System_V_ABI (System V ABI Application Binary Interface)
- - 
+ [1] Intel 64 and IA-32 Architectures Software Developer's Manual (June 2026 version), relevant here is especially the 
+ [2] https://wiki.osdev.org/System_V_ABI (System V ABI Application Binary Interface)
+
 
 (A) The assembler fragment to be compiled and its semantics.
 ============================================================
@@ -73,7 +73,9 @@ c++ -std=C++2x -Wall -Wextra -fPIC main-jit-step-1.cpp -o main-jit-step-1 && ./m
 using gen_ret_t = int;
 
 namespace x86_64{
- gen_ret_t opcode_ret(char* text){ 
+ gen_ret_t opcode_ret(char* text){
+    // RET - Return From Procedure.
+    // Near return to calling procedure ([1] Vol. 2B Chapter 4, p.569)
     *text = 0xc3; return 1; 
  }
 }
