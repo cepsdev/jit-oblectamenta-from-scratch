@@ -7,7 +7,7 @@ Project description.
 ====================
 
 Overall goal: JIT and run  assembler fragment in figure (A) on x86-64 (post 2013 architectures, i.e. Core iX 6XXX and better). 
-Use only the Linux API - assure POSIX compliance whenever possible, prefer C++/C standard library fuctions over OS if feasible. 
+Use only the Linux API - ensure POSIX compliance whenever possible, prefer C++/C standard library fuctions over OS if feasible. 
 Use the official Intel/AMD Manuals, the relevant System V ABI and man pages, an occasional peek into https://cppreference.com/ is also allowed. 
 
 !! NEVER apply AI !!
@@ -67,9 +67,8 @@ c++ -std=C++2x -Wall -Wextra -fPIC main-jit-step-2.cpp -o main-jit-step-2 && ./m
 
 
 
-// Step #2: Implement support of MOV REG1, REG2; MOV REG, IMM; MOV REG, MEMORY.
+// Step #3: Implement addition
 
-// Step #2.1: MOV DEST_REG, SOURCE_REG
 // How to test? We take advantage of the Sys V ABI, i.e. the way arguments and return values are passed on Linux.
 // The register RDI gets the first argument of a function call
 // The register RAX carries the result of a function
