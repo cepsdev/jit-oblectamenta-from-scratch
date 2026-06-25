@@ -143,6 +143,19 @@ namespace x86_64{
     return 3; 
  }
 
+ gen_ret_t opcode_mov_dest_reg_source_imm(char* text, int dest, uint64_t imm){
+    // MOV r64, imm64 
+    // REX.W + B8 + rd io | MOV r/m64,r64
+
+    text[0] = 0x48; // REX.W
+    text[1] = 0xB8; // Mod | Reg | R/M
+    int opcode_reg = 0;
+    int opcode_rm = dest;
+    text[2] = 0xC0 | (opcode_reg << 3) | (opcode_rm) ;
+    *(uint64_t*)(text + 3) = imm;
+    return 11; 
+ }
+
  void jump_to_program(char* );
  uint64_t jump_to_program(char* , uint64_t);
 }
