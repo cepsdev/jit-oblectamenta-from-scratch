@@ -1,3 +1,6 @@
+// THIS IS STEP #1
+
+
 /*
 Project description.
 ====================
@@ -78,10 +81,16 @@ namespace x86_64{
     // Near return to calling procedure ([1] Vol. 2B Chapter 4, p.569)
     *text = 0xc3; return 1; 
  }
+
+ void jump_to_program(char* text_seg);
 }
 
+void x86_64::jump_to_program(char* text_seg){
+    // We have to cast code_frag to void(*)(), i.e. function pointer to void(), and call it: ( (void(*)() )(code_frag))()
+    ((void(*)())(text_seg))();
+}
 
-void create_ret_fragment_and_execute(){
+void create_ret_fragment_and_execute(bool debug_info = true){
     using namespace x86_64;
     void * code_frag_raw =  mmap(0, 128, PROT_READ | PROT_WRITE | PROT_EXEC,  MAP_PRIVATE | MAP_ANONYMOUS, -1,0) ;
     // call memory map sys service, request 128 byte of writable, readable, executable private shared, anonymous, not file
@@ -94,13 +103,13 @@ void create_ret_fragment_and_execute(){
     
     opcode_ret(code_frag); // write ret opcode
 
-    std::cerr << "Jump in\n";
-    // We have to cast code_frag to void(*)(), i.e. function pointer to void(), and call it: ( (void(*)() )(code_frag))()
-    ((void(*)())(code_frag))(); // Jump to code
-    std::cerr << "Jump out\n";   
+    if(debug_info) std::cerr << "Jump in\n";
+    jump_to_program(code_frag);
+    if(debug_info)std::cerr << "Jump out\n";   
 }
 
 int main([[maybe_unused]]int argc, [[maybe_unused]]char ** argv){
-    create_ret_fragment_and_execute();
+    constexpr auto print_debug_messages{false};
+    create_ret_fragment_and_execute(print_debug_messages);
     return 0;
 }
