@@ -146,14 +146,17 @@ namespace x86_64{
  gen_ret_t opcode_mov_dest_reg_source_imm(char* text, int dest, uint64_t imm){
     // MOV r64, imm64 
     // REX.W + B8 + rd io | MOV r/m64,r64
-
+    /* [1] Vol 2A 3-2
+    +rb, +rw, +rd, +ro — Indicated the lower 3 bits of the opcode byte is used to encode the register operand
+    without a modR/M byte. The instruction lists the corresponding hexadecimal value of the opcode byte with low
+    3 bits as 000b. In non-64-bit mode, a register code, from 0 through 7, is added to the hexadecimal value of the
+    opcode byte. In 64-bit mode, indicates the four bit field of REX.b and opcode[2:0] field encodes the register
+     operand of the instruction. “+ro” is applicable only in 64-bit mode. See Table 3-1 for the codes.
+    */
     text[0] = 0x48; // REX.W
-    text[1] = 0xB8; // Mod | Reg | R/M
-    int opcode_reg = 0;
-    int opcode_rm = dest;
-    text[2] = 0xC0 | (opcode_reg << 3) | (opcode_rm) ;
-    *(uint64_t*)(text + 3) = imm;
-    return 11; 
+    text[1] = 0xB8 | dest; // Mod | Reg | R/M
+    *(uint64_t*)(text + 2) = imm;
+    return 10; 
  }
 
  void jump_to_program(char* );
@@ -183,9 +186,8 @@ void create_ret_fragment_and_execute(bool debug_info = true){
 
     auto code_frag = (char *)code_frag_raw;
     auto loc{0};
-    loc = opcode_mov_dest_reg_source_reg(code_frag + loc, registers::RAX, registers::RSI);
-
-    
+    loc += opcode_mov_dest_reg_source_imm(code_frag + loc, registers::RSI, 1789);
+    loc += opcode_mov_dest_reg_source_reg(code_frag + loc, registers::RAX, registers::RSI);
     opcode_ret(code_frag + loc); // write ret opcode
     uint64_t arg{43};
     if(debug_info) std::cerr << "Jump in, input vaue = "<< arg <<"\n";
