@@ -115,6 +115,9 @@ c++ -std=C++2x -Wall -Wextra -fPIC main-jit-step-2.cpp -o main-jit-step-2 && ./m
 using gen_ret_t = int;
 
 namespace x86_64{
+ namespace registers{
+  enum {RAX = 0, RCX, RDX, RBX, RSP, RBP, RSI, RDI };
+ }
  gen_ret_t opcode_ret(char* text){
     // RET - Return From Procedure.
     // Near return to calling procedure ([1] Vol. 2B Chapter 4, p.569)
@@ -134,7 +137,9 @@ namespace x86_64{
     */
     text[0] = 0x48; // REX.W
     text[1] = 0x89; // Mod | Reg | R/M
-    text[2] = 0xF0; // Mod = 11 , Reg = 110, R/M = 000 | 11110000
+    int opcode_reg = source;
+    int opcode_rm = dest;
+    text[2] = 0xC0 | (opcode_reg << 3) | (opcode_rm) ;
     return 3; 
  }
 
@@ -165,7 +170,7 @@ void create_ret_fragment_and_execute(bool debug_info = true){
 
     auto code_frag = (char *)code_frag_raw;
     auto loc{0};
-    loc = opcode_mov_dest_reg_source_reg(code_frag + loc, 0, 0);
+    loc = opcode_mov_dest_reg_source_reg(code_frag + loc, registers::RAX, registers::RSI);
 
     
     opcode_ret(code_frag + loc); // write ret opcode
