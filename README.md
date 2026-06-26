@@ -1,18 +1,17 @@
 # A just-in-time compiler from scratch
 ## Constraints:
- - Use a c++ compiler and an editor of your choice
- - no debugger, no fancy tools, VIM running in a terminal provides everything you gonna need.
- - Use only the Linux API - ensure POSIX compliance whenever possible,
- - Prefer C++/C standard library fuctions over OS if feasible. 
- - Use the official Intel/AMD Manuals, the relevant System V ABI and man pages
- - an occasional peek into https://cppreference.com/ is also allowed. 
- - nothing else is allowed, especially **no AI**
- - Absolutely *NO PACKAGE MANAGERS* whatsoever, provide simple bash scripts to build the stuff
- - Even a glimpse of a **PACKAGE MANAGER, cmake, bundlemumble etc.** leads to immediate disqualification.
+ - Needs only a c++ compiler to build
+ - No exrernal dependencies.
+ - Only Linux API, POSIX compliant whenever possible.
+ - C++/C standard library fuctions preferred over OS if feasible. 
+ - Code references official Intel/AMD Manuals, and the relevant System V ABI
+ - **No AI**
+ - No **PACKAGE MANAGER, cmake, bundlemumble etc.** needed.
 
 References: 
  [1] Intel 64 and IA-32 Architectures Software Developer's Manual ([June 2026 version](https://www.intel.com/content/www/us/en/developer/articles/technical/intel-sdm.html)) 
  [2] https://wiki.osdev.org/System_V_ABI (System V ABI Application Binary Interface)
+
 ## First Step
 ### Challenge: Write a just-in-time compiler for a reasonable subset of an experimental language (https://github.com/cepsdev/machines4ceps/blob/master/core/include/vm/vm_base.hpp) which runs on x64 Linux 
 ### First goal: JIT and run assembler fragment in figure (A) on x86-64 (post 2013 architectures, i.e. Core iX 6XXX and better). 
@@ -21,7 +20,7 @@ References:
 ```javascript
 kind Event;
 
-OblectamentaDataLabel counter;                         // section .dara
+OblectamentaDataLabel counter;                         // section .data
 oblectamenta{global{data{counter;0;};};};              // counter dd 0
 
 sm{
