@@ -8,6 +8,8 @@
  - Use the official Intel/AMD Manuals, the relevant System V ABI and man pages
  - an occasional peek into https://cppreference.com/ is also allowed. 
  - nothing else is allowed, especially **no AI**
+ - Absolutely *NO PACKAGE MANAGERS* whatsoever, provide simple bash scripts to build the stuff
+ - Even a glimpse of a **PACKAGE MANAGER, cmake, bundlemumble etc.** leads to immediate disqualification.
 
 References: 
  [1] Intel 64 and IA-32 Architectures Software Developer's Manual ([June 2026 version](https://www.intel.com/content/www/us/en/developer/articles/technical/intel-sdm.html)) 
