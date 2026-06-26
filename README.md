@@ -1,6 +1,8 @@
-# Challenge: Write a just-in-time compiler for a reasonable subset of an experimental language (https://github.com/cepsdev/machines4ceps/blob/master/core/include/vm/vm_base.hpp) which runs on x64 Linux 
-## Overall goal: JIT and run assembler fragment in figure (A) on x86-64 (post 2013 architectures, i.e. Core iX 6XXX and better). 
-## Constraints:
+# A just-in-time compiler from scratch
+## First Step
+### Challenge: Write a just-in-time compiler for a reasonable subset of an experimental language (https://github.com/cepsdev/machines4ceps/blob/master/core/include/vm/vm_base.hpp) which runs on x64 Linux 
+### Overall goal: JIT and run assembler fragment in figure (A) on x86-64 (post 2013 architectures, i.e. Core iX 6XXX and better). 
+### Constraints:
  - Use a c++ compiler and an editor of your choice
  - no debugger, no fancy tools, VIM running in a terminal provides everything you gonna need.
  - Use only the Linux API - ensure POSIX compliance whenever possible,
@@ -16,8 +18,8 @@ References:
  [2] https://wiki.osdev.org/System_V_ABI (System V ABI Application Binary Interface)
 
 
-# (A) The fragment to be compiled and its semantics.
-## (A.1) The assembler fragment
+## (A) The fragment to be compiled and its semantics.
+### (A.1) The assembler fragment
 ```javascript
 kind Event;
 
@@ -50,7 +52,7 @@ sm{
    };};};
  };
 ```
-## (A.2) Its meaning in terms of a semantically equivalent Python program
+### (A.2) Its meaning in terms of a semantically equivalent Python program
 ```python
 counter:int = 0
 while counter <  10000000:
