@@ -1,6 +1,8 @@
 # Challenge: Write a just-in-time compiler for a reasonable subset of an experimental language (https://github.com/cepsdev/machines4ceps/blob/master/core/include/vm/vm_base.hpp) which runs on x64 Linux 
 ## Overall goal: JIT and run assembler fragment in figure (A) on x86-64 (post 2013 architectures, i.e. Core iX 6XXX and better). 
 ## Constraints:
+ - Use a c++ compiler and an editor of your choice
+ - no debugger, no fancy tools, VIM running in a terminal provides everything you gonna need.
  - Use only the Linux API - ensure POSIX compliance whenever possible,
  - Prefer C++/C standard library fuctions over OS if feasible. 
  - Use the official Intel/AMD Manuals, the relevant System V ABI and man pages
