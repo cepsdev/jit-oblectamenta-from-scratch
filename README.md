@@ -48,7 +48,7 @@ sm{
    };};};
  };
 ```
-## (A.2) Its meaning in terms of an semantically equivalent Python program
+## (A.2) Its meaning in terms of a semantically equivalent Python program
 ```python
 counter:int = 0
 while counter <  10000000:
