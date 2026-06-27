@@ -1,7 +1,7 @@
 # A just-in-time compiler from scratch
 ## Constraints:
  - Needs only a c++ compiler to build
- - No exrernal dependencies.
+ - No external dependencies.
  - Only Linux API, POSIX compliant whenever possible.
  - C++/C standard library fuctions preferred over OS if feasible. 
  - Code references official Intel/AMD Manuals, and the relevant System V ABI
